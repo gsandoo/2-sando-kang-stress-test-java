@@ -11,6 +11,8 @@ public class Constants {
     public static final String USER_ROLE_CLAIM_NAME = "role";
     public static final String USER_ID_CLAIM_NAME = "uid";
     public static final String USER_EMAIL_CLAIM_NAME = "email";
+    public static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+    public static final String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#^])[A-Za-z\\d@$!%*?&#^]{8,20}$";
 
 
 
