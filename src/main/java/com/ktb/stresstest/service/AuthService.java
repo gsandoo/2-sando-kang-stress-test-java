@@ -56,14 +56,17 @@ public class AuthService {
         );
 
         if (profile != null){
-            String url = s3UseCase.uploadUserProfile(profile, newUser.getId());
-            UserProfile userProfile = UserProfile.builder()
-                    .user(newUser)
-                    .createdAt(LocalDateTime.now())
-                    .editedAt(LocalDateTime.now())
-                    .imageUrl(url)
-                    .build();
-            userProfileRepository.save(userProfile);
+            String url = s3UseCase.uploadImage(profile, newUser.getId());
+
+            userProfileRepository.save(
+                    UserProfile.builder()
+                            .user(newUser)
+                            .createdAt(LocalDateTime.now())
+                            .editedAt(LocalDateTime.now())
+                            .imageUrl(url)
+                            .build()
+            );
+
             newUser.updateProfileImage(url);
         }
 
