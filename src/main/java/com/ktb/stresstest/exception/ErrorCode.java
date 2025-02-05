@@ -18,6 +18,8 @@ public enum ErrorCode {
     DUPLICATED_EMAIL("40006", HttpStatus.BAD_REQUEST, "해당 이메일로 가입된 계정이 존재합니다."),
     DUPLICATED_NICKNAME("40007", HttpStatus.BAD_REQUEST, "중복된 닉네임입니다."),
     INVALID_LOGIN("40008", HttpStatus.BAD_REQUEST, "로그인 정보가 올바르지 않습니다."),
+    TITLE_ERROR("40009", HttpStatus.BAD_REQUEST, "게시물 제목의 길이가 26자를 넘을 수 없습니다."),
+    CONTENT_ERROR("40010", HttpStatus.BAD_REQUEST, "게시물 내용의 길이가 100자를 넘을 수 없습니다."),
 
     // 401 ERROR
     FAILURE_LOGIN("40100", HttpStatus.UNAUTHORIZED, "로그인에 실패했습니다."),
@@ -38,6 +40,8 @@ public enum ErrorCode {
     // 404 ERROR
     NOT_FOUND_USER("40400", HttpStatus.NOT_FOUND, "해당 사용자가 존재하지 않습니다."),
     NOT_FOUND_END_POINT("40401", HttpStatus.NOT_FOUND, "존재하지 않는 엔드포인트입니다."),
+    NOT_FOUND_POST("40402",HttpStatus.NOT_FOUND, "해당 게시물이 존재하지 않습니다."),
+    NOT_FOUND_COMMENT("40403",HttpStatus.NOT_FOUND, "해당 댓글이 존재하지 않습니다."),
 
     // 415 ERROR
     UNSUPPORTED_MEDIA_TYPE("41500", HttpStatus.UNSUPPORTED_MEDIA_TYPE, "허용되지 않은 파일 형식입니다."),
