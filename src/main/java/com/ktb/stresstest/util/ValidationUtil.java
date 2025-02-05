@@ -24,4 +24,16 @@ public class ValidationUtil {
             throw new CommonException(ErrorCode.PASSWORD_ERROR);
         }
     }
+
+    public void validateTitleLength(String title) {
+        if (title.length() > 26) {
+            throw new CommonException(ErrorCode.TITLE_ERROR);
+        }
+    }
+
+    public void validateContentLength(String content) {
+        if (content.length() > 100) {
+            throw new CommonException(ErrorCode.CONTENT_ERROR);
+        }
+    }
 }
