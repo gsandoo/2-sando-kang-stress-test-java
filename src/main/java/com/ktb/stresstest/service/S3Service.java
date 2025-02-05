@@ -5,6 +5,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.*;
 import com.ktb.stresstest.exception.CommonException;
 import com.ktb.stresstest.exception.ErrorCode;
+import com.ktb.stresstest.usecase.S3UseCase;
 import com.ktb.stresstest.util.ImageUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +24,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class S3Service {
+public class S3Service implements S3UseCase{
 
     private final AmazonS3 s3Client;
     private final ImageUtil imageUtil;
@@ -127,7 +128,7 @@ public class S3Service {
     }
 
     // 이미지파일명 중복 방지
-    private String createFileName(String fileName, Long popupId) {
+    public String createFileName(String fileName, Long popupId) {
         if (fileName.isEmpty()) {
             throw new CommonException(ErrorCode.MISSING_REQUEST_IMAGES);
         }
@@ -140,7 +141,7 @@ public class S3Service {
     }
 
     // 파일 유효성 검사
-    private String getFileExtension(String fileName) {
+    public String getFileExtension(String fileName) {
         ArrayList<String> fileValidate = new ArrayList<>();
         fileValidate.add(".jpg");
         fileValidate.add(".jpeg");

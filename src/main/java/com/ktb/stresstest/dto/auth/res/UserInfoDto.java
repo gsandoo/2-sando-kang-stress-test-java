@@ -4,12 +4,12 @@ import lombok.AccessLevel;
 import lombok.Builder;
 
 @Builder(access = AccessLevel.PRIVATE)
-public record SigninDto(
+public record UserInfoDto(
         UserResDto user,
         JwtTokenDto jwtToken
 ) {
-    public static SigninDto create(UserResDto user, JwtTokenDto jwtToken){
-        return SigninDto.builder()
+    public static UserInfoDto create(UserResDto user, JwtTokenDto jwtToken){
+        return UserInfoDto.builder()
                 .user(user)
                 .jwtToken(jwtToken)
                 .build();
