@@ -33,7 +33,7 @@ public class S3Service implements S3UseCase{
     private String bucketUserProfile;
 
     //
-    public String uploadUserProfile(MultipartFile multipartFile, Long userId) {
+    public String uploadImage(MultipartFile multipartFile, Long userId) {
         String imageUrl = "";
         String fileName = createFileName(multipartFile.getOriginalFilename(), userId);
         ObjectMetadata objectMetadata = new ObjectMetadata();

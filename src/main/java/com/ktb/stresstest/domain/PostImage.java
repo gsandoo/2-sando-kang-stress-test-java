@@ -1,6 +1,5 @@
 package com.ktb.stresstest.domain;
 
-
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -8,12 +7,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DynamicUpdate
-@Table(name = "likes")
-public class Like {
+@Table(name = "post-image")
+public class PostImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,14 +25,21 @@ public class Like {
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "post_id", referencedColumnName = "id", nullable = false)
-    private Post post;
+    @Column(name = "image_url")
+    private String imageUrl;
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "edited_at", nullable = false)
+    private LocalDateTime editedAt;
 
     @Builder
-    public Like(User user, Post post){
+    public PostImage(Long id, User user, String imageUrl, LocalDateTime createdAt, LocalDateTime editedAt) {
+        this.id = id;
         this.user = user;
-        this.post = post;
+        this.imageUrl = imageUrl;
+        this.createdAt = createdAt;
+        this.editedAt = editedAt;
     }
-
 }

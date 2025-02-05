@@ -48,22 +48,25 @@ public class Post {
     private Long views;
 
     @Builder
-    public Post(Long id, User user, String title, String content, String url, LocalDate date, Long likes, Long comments, Long views) {
-        this.id = id;
+    public Post(User user, String title, String content, String url) {
         this.user = user;
         this.title = title;
         this.content = content;
         this.url = url;
-        this.date = date;
-        this.likes = likes;
-        this.comments = comments;
-        this.views = views;
+        this.date = LocalDate.now();
+        this.likes = Long.valueOf(0);
+        this.comments = Long.valueOf(0);
+        this.views = Long.valueOf(0);
     }
 
+    public void updateTitle(String title) { this.title = title; }
+    public void updateContent(String content) { this.title = content; }
+    public void updateUrl(String url) { this.url = url; }
     public void increaseLikes(){
         this.likes+=1;
     }
-
+    public void decreaseLikes(){ this.likes-=1; }
+    public void increaseViews(){ this.views+=1; }
     public void increaseComments(){
         this.comments+=1;
     }

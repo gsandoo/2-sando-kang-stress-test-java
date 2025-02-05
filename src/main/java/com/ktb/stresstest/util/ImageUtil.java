@@ -14,7 +14,7 @@ import java.util.Iterator;
 
 @Component
 public class ImageUtil {
-    public static InputStream cropImageToSquare(InputStream originalImageStream) throws IOException {
+    public InputStream cropImageToSquare(InputStream originalImageStream) throws IOException {
         // InputStream의 내용을 메모리에 저장합니다.
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         originalImageStream.transferTo(buffer);
@@ -42,7 +42,7 @@ public class ImageUtil {
     }
 
     // InputStream으로부터 이미지 형식을 추출합니다.
-    private static String getFormatName(InputStream input) throws IOException {
+    private String getFormatName(InputStream input) throws IOException {
         try (ImageInputStream iis = ImageIO.createImageInputStream(input)) {
             Iterator<ImageReader> imageReaders = ImageIO.getImageReaders(iis);
             if (!imageReaders.hasNext()) {

@@ -8,7 +8,7 @@ import java.util.List;
 @UseCase
 public interface S3UseCase {
 
-    String uploadUserProfile(MultipartFile multipartFile, Long userId);
+    String uploadImage(MultipartFile multipartFile, Long userId);
 
     void deleteImage(String url);
 
