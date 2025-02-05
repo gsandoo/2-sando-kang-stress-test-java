@@ -13,10 +13,11 @@ public enum ErrorCode {
     MISSING_REQUEST_PARAMETER("40001", HttpStatus.BAD_REQUEST, "필수 파라미터가 누락되었습니다."),
     MISSING_REQUEST_BODY("40002", HttpStatus.BAD_REQUEST, "요청 바디가 누락되었습니다."),
     EMAIL_ERROR("40003", HttpStatus.BAD_REQUEST, "유효하지 않은 이메일 형식입니다."),
-    PASSWORD_ERROR("40004", HttpStatus.BAD_REQUEST, "비밀번호는 8~20자이며, 최소 1개의 대문자, 소문자, 숫자, 특수문자를 포함해야 합니다"),
+    PASSWORD_ERROR("40004", HttpStatus.BAD_REQUEST, "비밀번호는 8~20자이며, 최소 1개의 대문자, 소문자, 숫자, 특수문자를 포함해야 합니다."),
     MISSING_REQUEST_IMAGES("40005", HttpStatus.BAD_REQUEST, "이미지가 누락되었습니다."),
     DUPLICATED_EMAIL("40006", HttpStatus.BAD_REQUEST, "해당 이메일로 가입된 계정이 존재합니다."),
     DUPLICATED_NICKNAME("40007", HttpStatus.BAD_REQUEST, "중복된 닉네임입니다."),
+    INVALID_LOGIN("40008", HttpStatus.BAD_REQUEST, "로그인 정보가 올바르지 않습니다."),
 
     // 401 ERROR
     FAILURE_LOGIN("40100", HttpStatus.UNAUTHORIZED, "로그인에 실패했습니다."),
