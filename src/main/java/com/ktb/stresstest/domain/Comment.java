@@ -36,11 +36,12 @@ public class Comment {
     private LocalDate date;
 
     @Builder
-    public Comment(Long id, User user, Post post, String comment, LocalDate date) {
-        this.id = id;
+    public Comment(User user, Post post, String comment) {
         this.user = user;
         this.post = post;
         this.comment = comment;
-        this.date = date;
+        this.date = LocalDate.now();
     }
+
+    public void updateComment(String content){ this.comment = content; }
 }

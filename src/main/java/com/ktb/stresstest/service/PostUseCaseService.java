@@ -33,4 +33,5 @@ public class PostUseCaseService implements PostUseCase {
     public Page findAll(Pageable pageable) {
         return postRepository.findAll(pageable);
     }
+
 }

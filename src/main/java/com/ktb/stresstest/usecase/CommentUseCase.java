@@ -8,6 +8,5 @@ import java.util.List;
 
 @UseCase
 public interface CommentUseCase {
-
     List<Comment> findCommentsByPostId(Long postId);
 }

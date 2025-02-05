@@ -10,4 +10,5 @@ public interface PostUseCase {
     Post findById(Long postId);
     Post findByUserId(Long userId);
     Page findAll(Pageable pageable);
+
 }
