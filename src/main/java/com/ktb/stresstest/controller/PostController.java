@@ -27,7 +27,6 @@ public class PostController {
     public ResponseDto<?> getPostWithComments(@PathVariable Long postId, HttpServletRequest request){
         return ResponseDto.ok(postService.getPostWithComments(postId, request));
     }
-
     @PostMapping(value = "", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseDto<?> createPost(
             @UserId Long userId,
@@ -48,13 +47,13 @@ public class PostController {
         return ResponseDto.ok(postService.updatePost(userId, title, content, image));
     }
 
-    @DeleteMapping(value = "")
-    public ResponseDto<?> deletePost(@UserId Long userId, Long postId){
+    @DeleteMapping( "/{postId}")
+    public ResponseDto<?> deletePost(@UserId Long userId, @PathVariable Long postId){
         postService.deletePost(userId, postId);
         return ResponseDto.ok("게시물이 삭제 되었습니다.");
     }
-    @PatchMapping("")
-    public ResponseDto<?> likesPost(@UserId Long userId, Long postId){
+    @PatchMapping("/{postId}")
+    public ResponseDto<?> likesPost(@UserId Long userId, @PathVariable Long postId){
         return ResponseDto.ok(postService.likesPost(userId, postId));
     }
 }

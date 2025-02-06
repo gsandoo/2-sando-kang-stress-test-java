@@ -117,11 +117,14 @@ public class PostService {
     public void deletePost(Long userId, Long postId){
 
         User user = userUseCase.findById(userId);
-        Post post = postUseCase.findById(postId);
+        Post post = postUseCase.findByUserId(userId);
+
 
         s3UseCase.deleteImage(user.getProfileUrl());
         s3UseCase.deleteImage(post.getUrl());
         likeUseCase.remove(userId, postId);
+
+        postRepository.delete(post);
 
     }
 
@@ -129,6 +132,7 @@ public class PostService {
     public PostResDto likesPost(Long userId, Long postId){
 
         User user = userUseCase.findById(userId);
+
         Post post = postUseCase.findById(postId);
 
         Like like = likeUseCase.findByUserAndPostId(userId, postId).orElse(null);
