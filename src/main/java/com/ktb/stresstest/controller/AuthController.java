@@ -2,7 +2,6 @@ package com.ktb.stresstest.controller;
 
 import com.ktb.stresstest.annotation.UserId;
 import com.ktb.stresstest.dto.ResponseDto;
-import com.ktb.stresstest.dto.auth.res.UserInfoDto;
 import com.ktb.stresstest.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

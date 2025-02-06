@@ -24,13 +24,6 @@ public class Constants {
             "/api/auth/signin",
             "/api/auth/login/**",
 
-            // 게시글
-            "/api/post",
-            "/api/post/**",
-
-            // 댓글
-            "/api/comment/**",
-
             // 헬스체크
             "/api/health/",
             "/api/health/startup",

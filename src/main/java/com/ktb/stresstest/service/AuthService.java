@@ -73,6 +73,7 @@ public class AuthService {
         return buildUser(newUser);
     }
 
+    @Transactional
     public UserInfoDto handleLogin(String email, String password){
         validationUtil.validateEmail(email);
         validationUtil.validatePassword(password);
@@ -86,6 +87,7 @@ public class AuthService {
         return buildUser(user);
     }
 
+    @Transactional
     //TODO: must delete post, comment, likes from databases.
     public String handleWithdraw(Long userId){
         User user = userUseCase.findById(userId);
@@ -97,26 +99,33 @@ public class AuthService {
         return "회원 탈퇴가 정상적으로 되었습니다.";
     }
 
+    @Transactional
     public UserInfoDto updateProfile(Long userId, String nickname, MultipartFile profile){
         User user = userUseCase.findById(userId);
 
-        String updatedUrl = s3UseCase.replaceImage(user.getProfileUrl(), profile, userId);
+        String updatedUrl = (user.getProfileUrl() != null)
+                ? s3UseCase.replaceImage(user.getProfileUrl(), profile, userId)
+                : s3UseCase.uploadImage(profile, userId);
 
         user.updateProfileImage(updatedUrl);
+
         user.updateUserNickname(nickname);
 
         return buildUser(user);
     }
 
+    @Transactional
     public UserInfoDto updatePassword(Long userId, String password){
         User user = userUseCase.findById(userId);
 
-        user.updatePassword(password);
+        validationUtil.validatePassword(password);
+
+        user.updatePassword(bCryptPasswordEncoder.encode(password));
 
         return buildUser(user);
     }
 
-
+    @Transactional
     private UserInfoDto buildUser(User newUser){
         UserResDto userResponse = UserResDto.create(newUser);
         JwtTokenDto jwtToken = jwtUtil.generateToken(newUser.getId(), EUserRole.USER);

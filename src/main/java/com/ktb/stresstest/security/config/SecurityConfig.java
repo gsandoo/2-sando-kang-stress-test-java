@@ -52,7 +52,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                                 .requestMatchers(Constants.NO_NEED_AUTH_URLS.toArray(new String[0])).permitAll()
-                                .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                                .requestMatchers(request ->
+                                        "/api/post".equals(request.getRequestURI()) &&
+                                                request.getParameter("page") != null
+                                ).permitAll()
+                                .requestMatchers("/api/post/{postId:[0-9]+}").permitAll()
+                                .requestMatchers("/api/comment/{postId:[0-9]+}").permitAll()
                                 .anyRequest().authenticated())
                 .formLogin(AbstractHttpConfigurer::disable)
                 .exceptionHandling((exceptionHandling) ->
