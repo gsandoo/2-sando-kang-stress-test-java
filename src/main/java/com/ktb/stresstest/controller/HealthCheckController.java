@@ -18,7 +18,7 @@ public class HealthCheckController {
         return ResponseDto.ok("health 체크 성공");
     }
 
-    @GetMapping("readiness")
+    @GetMapping("/readiness")
     public ResponseDto<?> readiness(){
         return ResponseDto.ok("readiness 체크 성공");
     }
@@ -28,7 +28,7 @@ public class HealthCheckController {
         return ResponseDto.ok("startup 체크 성공");
     }
 
-    @GetMapping("liveness")
+    @GetMapping("/liveness")
     public ResponseDto<?> liveness(){
         return ResponseDto.ok("liveness 체크 성공");
     }
