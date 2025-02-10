@@ -41,6 +41,4 @@ src/main/resources/*.yml
 
 .gitattributes
 build.gradle
-gradlew
-gradlew.bat
 settings.gradle
