@@ -1,4 +1,4 @@
-name: Java CI
+name: Java CI/CD
 
 on:
   push:
@@ -43,6 +43,23 @@ jobs:
           ./gradlew clean bootJar
         continue-on-error: false
 
+      # ✅ 빌드된 JAR 파일 검증 (정상적으로 생성되었는지 확인)
+      - name: Verify Built JAR File
+        run: |
+          echo "📝 build/libs/ 디렉토리 내 파일 확인"
+          ls -la build/libs/
+          echo "🔍 JAR 파일이 존재하는지 확인"
+          if [ ! -f build/libs/*.jar ]; then
+            echo "🚨 JAR 파일이 존재하지 않습니다! Gradle 빌드를 확인하세요."
+            exit 1
+          fi
+
+      # ✅ JAR 내부 `application.yml` 포함 여부 확인
+      - name: Verify application.yml Inside JAR
+        run: |
+          echo "🔍 JAR 내부 application.yml 확인"
+          jar tf build/libs/*.jar | grep "application" || (echo "🚨 application.yml이 JAR 내부에 포함되지 않았습니다!" && exit 1)
+
       # ✅ Docker Hub 로그인
       - name: Login To DockerHub
         uses: docker/login-action@v1
@@ -51,7 +68,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       # ✅ Docker 이미지 빌드
-      - name: Image Build
+      - name: Build Docker Image
         env:
           NAME: ${{ secrets.DOCKERHUB_USERNAME }}
           REPO: ${{ secrets.DOCKERHUB_REPOSITORY }}
