@@ -10,5 +10,9 @@ ARG JAR_FILE=target/*.jar
 # 빌드된 JAR 파일을 이미지 내 app.jar로 복사
 COPY ./build/libs/*.jar app.jar
 
+# application.yml
+COPY src/main/resources/application.yml BOOT-INF/classes/application.yml
+COPY src/main/resources/application-dev.yml BOOT-INF/classes/application-dev.yml
+
 # 컨테이너 시작 시 JAR 파일을 실행하는 명령어 설정
 ENTRYPOINT ["java", "-Dspring.profiles.active=dev", "-jar", "app.jar"]
