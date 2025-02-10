@@ -1,4 +1,4 @@
-name: Java CI with Gradle
+ame: Java CI with Gradle
 
 on:
   push:
@@ -8,40 +8,32 @@ jobs:
   build-docker-image:
     runs-on: ubuntu-latest
     steps:
-      # ✅ Git 체크아웃
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-        with:
-          submodules: true
-          fetch-depth: 0
+      - uses: actions/checkout@v3
 
-      # ✅ 작업 디렉토리 확인
-      - name: Check Working Directory
-        run: pwd && ls -la
-
-      # ✅ JDK 17 설치
+      # JDK 17 버전 설치
       - name: Set Up JDK 17
         uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      # ✅ Gradlew 실행 권한 부여
-      - name: Grant execute permission to Gradlew
+      - name: Run chmod to make gradlew executable
         run: chmod +x ./gradlew
 
-      # ✅ Gradle 빌드 실행
-      - name: Build with Gradle Wrapper
-        run: ./gradlew clean bootJar
+      # Gradle 빌드
+      - name: Build and Gradle
+        uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+        with:
+          arguments: clean bootJar
 
-      # ✅ Docker Hub 로그인
+      # Docker Hub 로그인
       - name: Login To DockerHub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # ✅ Docker 이미지 빌드 및 푸시
+      # Docker 이미지 빌드 및 푸시
       - name: Image Build and Release to DockerHub
         env:
           NAME: ${{ secrets.DOCKERHUB_USERNAME }}
