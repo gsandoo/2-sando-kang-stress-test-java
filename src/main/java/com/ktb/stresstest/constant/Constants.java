@@ -28,7 +28,9 @@ public class Constants {
             "/api/health/",
             "/api/health/startup",
             "/api/health/liveness",
-            "/api/health/readiness"
+            "/api/health/readiness",
+
+            "/actuator/**"
     );
 
 }
