@@ -11,4 +11,4 @@ ARG JAR_FILE=target/*.jar
 COPY ./build/libs/*.jar app.jar
 
 # 컨테이너 시작 시 JAR 파일을 실행하는 명령어 설정
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Dspring.profiles.active=dev", "-jar", "app.jar"]
